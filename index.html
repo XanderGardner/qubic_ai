@@ -6,7 +6,8 @@
 
     <!-- navigation scripts -->
     <script>
-      const baseURL = window.location.pathname.endsWith('/qubic_ai/') ? '/qubic_ai/' : '/';
+      const isLocalDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const baseURL = isLocalDevelopment ? '/' : '/qubic_ai/';
       function navigateTo(page) {
         window.location.href = baseURL + page;
       }
