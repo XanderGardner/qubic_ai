@@ -3,10 +3,24 @@
 	<head>
 		<meta charset="utf-8">
 		<title>2 Player Qubic</title>
-		<script>
-      // set the base URL dynamically based on the environment (github pages or local development)
+		
+
+    <!-- navigation scripts -->
+    <script>
       const baseURL = window.location.pathname.endsWith('/qubic_ai/') ? '/qubic_ai/' : '/';
+      function navigateTo(page) {
+        window.location.href = baseURL + page;
+      }
     </script>
+
+    <!-- style -->
+    <script>
+      const linkElement = document.createElement('link');
+      linkElement.rel = 'stylesheet';
+      linkElement.href = baseURL + 'styles.css';
+      document.head.appendChild(linkElement);
+    </script>
+
     <!-- define where to get threejs package -->
     <script type="importmap">
       {
@@ -16,11 +30,20 @@
         }
       }
     </script>
-    <link rel="stylesheet" href="${baseURL}styles.css">
+
 	</head>
 
 	<body>
     <div id="info">Cool Rotating Box</div>
-		<script type="module" src="/qubic_ai/main.js"></script>
+		
+    <!-- game code -->
+    <script>
+      const scriptElement = document.createElement('script');
+      scriptElement.type = 'module';
+      scriptElement.src = baseURL + 'main.js';
+      document.head.appendChild(scriptElement);
+    </script>
+
+
 	</body>
 </html>
