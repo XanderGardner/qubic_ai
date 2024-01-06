@@ -3,14 +3,21 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Qubic</title>
-		<style>
-			body { margin: 0; }
-		</style>
-    <link rel="stylesheet" href="styles.css">
+
+    <!-- navigation scripts -->
+    <script>
+      const baseURL = window.location.pathname.endsWith('/qubic_ai/') ? '/qubic_ai/' : '/';
+      function navigateTo(page) {
+        window.location.href = baseURL + page;
+      }
+    </script>
+
+    <!-- style -->
+    <link rel="stylesheet" href="${baseURL}styles.css">
 	</head>
 
 	<body>
     <div>Cool Rotating Box</div>
-    <a href="basic_game.html"><button>Go to game</button></a>
-	</body>
+    <a href="#" onclick="navigateTo('basic_game.html')">Go to About</a>
+  </body>
 </html>
