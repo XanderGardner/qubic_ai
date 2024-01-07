@@ -1,10 +1,10 @@
 
 // represent a qubic game 
-class QubicGame {
+export class QubicGame {
   
   constructor() {
     // "1" or "2" for player turn, "-1" or "-2" for complete game, "0" for tie
-    this.state = "1";
+    this.state = 1;
     // represent the board in a string
     this.board = "0".repeat(64);
     // store winning positions
@@ -90,6 +90,12 @@ class QubicGame {
   // return the current state of the game
   getState() {
     return this.state;
+  }
+
+  // get what token is at position x,y,z
+  getToken(x, y, z) {
+    let i = this.get2dCoord(x, y, z);
+    return parseInt(this.board[i]);
   }
 
 
@@ -191,80 +197,80 @@ class QubicGame {
       let [a,b,c,d] = this.dirs[i];
       if (board[a] !== "0" && board[a] === board[b]
           && board[b] === board[c] && board[c] === board[d]) {
-        return -board[a];
+        return -parseInt(board[a]);
       }
     }
 
     // check if tie "0"
     if (emptyCount === 0) {
-      return "0";
+      return 0;
     }
 
     // check whos turn it is (player with less pieces else 1)
     if (twoCount < oneCount) {
-      return "2";
+      return 2;
     } else {
-      return "1";
+      return 1;
     }
   }
   
 }
 
-let g = new QubicGame();
+// let g = new QubicGame();
 
-console.log("Test Game");
-console.log(g.getState());
-console.log(g.board);
-
-
-console.log("-------");
-let [x, y, z] = [0, 0, 0];
-console.log(x, y, z);
-g.makeMove(x, y, z);
-console.log(g.getState());
-
-console.log("-------");
-[x, y, z] = [1, 1, 1];
-console.log(x, y, z);
-g.makeMove(x, y, z);
-console.log(g.getState());
-
-console.log("-------");
-[x, y, z] = [1, 0, 1];
-console.log(x, y, z);
-g.makeMove(x, y, z);
-console.log(g.getState());
+// console.log("Test Game");
+// console.log(g.getState());
+// console.log(g.board);
 
 
-console.log("-------");
-[x, y, z] = [2, 2, 2];
-console.log(x, y, z);
-g.makeMove(x, y, z);
-console.log(g.getState());
+// console.log("-------");
+// let [x, y, z] = [0, 0, 0];
+// console.log(x, y, z);
+// g.makeMove(x, y, z);
+// console.log(g.getState());
+
+// console.log("-------");
+// [x, y, z] = [1, 1, 1];
+// console.log(x, y, z);
+// g.makeMove(x, y, z);
+// console.log(g.getState());
+
+// console.log("-------");
+// [x, y, z] = [1, 0, 1];
+// console.log(x, y, z);
+// g.makeMove(x, y, z);
+// console.log(g.getState());
 
 
-console.log("-------");
-[x, y, z] = [2, 0, 2];
-console.log(x, y, z);
-g.makeMove(x, y, z);
-console.log(g.getState());
+// console.log("-------");
+// [x, y, z] = [2, 2, 2];
+// console.log(x, y, z);
+// g.makeMove(x, y, z);
+// console.log(g.getState());
 
 
-console.log("-------");
-[x, y, z] = [3, 3, 3];
-console.log(x, y, z);
-g.makeMove(x, y, z);
-console.log(g.getState());
+// console.log("-------");
+// [x, y, z] = [2, 0, 2];
+// console.log(x, y, z);
+// g.makeMove(x, y, z);
+// console.log(g.getState());
 
 
-console.log("-------");
-[x, y, z] = [3, 0, 3];
-console.log(x, y, z);
-g.makeMove(x, y, z);
-console.log(g.getState());
+// console.log("-------");
+// [x, y, z] = [3, 3, 3];
+// console.log(x, y, z);
+// g.makeMove(x, y, z);
+// console.log(g.getState());
 
-console.log("-----");
-console.log("winning coords:");
-console.log(g.getWinningCoords());
-console.log("winner: "+ g.getWinner());
+
+// console.log("-------");
+// [x, y, z] = [3, 0, 3];
+// console.log(x, y, z);
+// g.makeMove(x, y, z);
+// console.log(g.getState());
+
+// console.log("-----");
+// console.log("winning coords:");
+// console.log(g.getWinningCoords());
+// console.log("winner: "+ g.getWinner());
 

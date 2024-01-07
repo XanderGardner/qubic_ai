@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>2 Player Qubic</title>
+		<title>Qubic - 2 Player</title>
 		
 
     <!-- navigation scripts -->
@@ -18,7 +18,7 @@
     <script>
       const linkElement = document.createElement('link');
       linkElement.rel = 'stylesheet';
-      linkElement.href = baseURL + 'styles.css';
+      linkElement.href = baseURL + 'styles/base.css';
       document.head.appendChild(linkElement);
     </script>
 
@@ -35,14 +35,16 @@
 	</head>
 
 	<body>
-    <div id="info">Cool Rotating Box</div>
+    <div id="info">2 Player</div>
 		
     <!-- game code -->
     <script>
-      const scriptElement = document.createElement('script');
-      scriptElement.type = 'module';
-      scriptElement.src = baseURL + 'main.js';
-      document.body.appendChild(scriptElement);
+      const gameType = "multiplayer";
+
+      const engineScript = document.createElement('script');
+      engineScript.type = 'module';
+      engineScript.src = baseURL + 'scripts/game_engine.js';
+      document.body.appendChild(engineScript);
     </script>
 
 

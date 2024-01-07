@@ -17,7 +17,7 @@
     <script>
       const linkElement = document.createElement('link');
       linkElement.rel = 'stylesheet';
-      linkElement.href = baseURL + 'styles.css';
+      linkElement.href = baseURL + 'styles/base.css';
       document.head.appendChild(linkElement);
     </script>
     
@@ -27,6 +27,9 @@
     <div>Cool Rotating Box</div>
 
     <!-- button go to game -->
-    <a href="#" onclick="navigateTo('basic_game.html')">Go to About</a>
+    <a href="#" onclick="navigateTo('game/ai_easy.html')">Easy AI</a>
+    <a href="#" onclick="navigateTo('game/ai_medium.html')">Medium AI</a>
+    <a href="#" onclick="navigateTo('game/ai_hard.html')">Hard AI</a>
+    <a href="#" onclick="navigateTo('game/multiplayer.html')">2 Player</a>
   </body>
 </html>
