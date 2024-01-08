@@ -9,9 +9,12 @@ import { QubicGame } from './qubic_game.js';
 
 // constants
 const z_stretch = 2;
-const color_board_edges = 0x00ff00;
-const color_token1 = 0x00ff00;
-const color_token2 = 0xff0000;
+const color_board_edges = 0xb6a19e;
+const color_board_edges_css = "#b6a19e";
+const color_token1 = 0x68baa7;
+const color_token1_css = "#68baa7";
+const color_token2 = 0xfba100;
+const color_token2_css = "#fba100";
 const opacity_base = 0.6
 const opacity_hover = 0.3;
 
@@ -38,8 +41,8 @@ const mousePosition = new THREE.Vector2(-5,-5);
 const rayCaster = new THREE.Raycaster();
 
 // create axes
-const axes = new THREE.AxesHelper(5)
-scene.add(axes)
+// const axes = new THREE.AxesHelper(5)
+// scene.add(axes)
 
 // create spaces
 function create_space(x, y, z) {
@@ -89,6 +92,58 @@ const game = new QubicGame();
 function get_token_position(token_object) {
   let [coordx,coordy,coordz] = token_object.position;
   return [Math.floor(coordx), Math.floor(coordy), Math.floor(coordz/z_stretch)];
+}
+
+// set the game state div to indicate the game state
+let gameStateDiv = document.getElementById('gamestatediv');
+function set_game_state_div() {
+  let state = game.getState();
+  if (state === 2) {
+    gameStateDiv.textContent = "Player 2's Turn";
+    gameStateDiv.style.color = color_token2_css;
+  } else if (state === 1) {
+    gameStateDiv.textContent = "Player 1's Turn";
+    gameStateDiv.style.color = color_token1_css;
+  } else if (state === -2) {
+    gameStateDiv.textContent = "Player 2 Wins!";
+    gameStateDiv.style.color = color_token2_css;
+  } else if (state === -1) {
+    gameStateDiv.textContent = "Player 1 Wins!";
+    gameStateDiv.style.color = color_token1_css;
+  } else {
+    gameStateDiv.textContent = "It's A Tie!";
+    gameStateDiv.style.color = color_board_edges_css;
+  }
+}
+set_game_state_div()
+
+function set_solution() {
+  const [a,b,c,d] = game.getWinningCoords();
+  const x1 = a[0]+0.5;
+  const y1 = a[1]+0.5;
+  const z1 = a[2] * z_stretch;
+  const x2 = b[0]+0.5;
+  const y2 = b[1]+0.5;
+  const z2 = b[2] * z_stretch;
+
+  const startPoint = new THREE.Vector3(x1, y1, z1);
+  const endPoint = new THREE.Vector3(x2, y2, z2);
+  const direction = new THREE.Vector3().subVectors(endPoint, startPoint);
+  
+  // cylinder geometry
+  const radius = 0.1; 
+  const height = 800;
+  const radialSegments = 8;
+  const geometry = new THREE.CylinderGeometry(radius, radius, height, radialSegments);
+  const color = game.getWinner() === 1 ? color_token1 : color_token2;
+  const material = new THREE.MeshBasicMaterial({color: color, opacity: 0.4, transparent: true});
+  const tube = new THREE.Mesh(geometry, material);
+  tube.position.copy(startPoint);
+  
+  // orientation
+  tube.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction.clone().normalize());
+  
+  scene.add(tube);
 }
 
 // set the token color as it should be
@@ -144,6 +199,10 @@ window.addEventListener('mousedown', function(e) {
   // make move
   game.makeMove(x,y,z);
   set_token_color_base(curr_token);
+  set_game_state_div();
+  if (game.gameOver()) {
+    set_solution();
+  }
 });
 
 

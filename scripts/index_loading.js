@@ -6,11 +6,7 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
 // constants
 const z_stretch = 2;
-const color_board_edges = 0x00ff00;
-const color_token1 = 0x00ff00;
-const color_token2 = 0xff0000;
-const opacity_base = 0.6
-const opacity_hover = 0.3;
+const color_board_edges = 0xb6a19e;
 
 // create scene, camera, and rederer
 const scene = new THREE.Scene();

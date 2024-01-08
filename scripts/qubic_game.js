@@ -53,8 +53,10 @@ export class QubicGame {
   getWinningCoords() {
     for (let i = 0; i < this.dirs.length; i++) {
       let [a,b,c,d] = this.dirs[i];
-      if (this.board[a] !== "0" && this.board[a] === this.board[b]
-          && this.board[b] === this.board[c] && this.board[c] === this.board[d]) {
+      if (this.board.charAt(a) !== "0" && this.board.charAt(a) === this.board.charAt(b)
+          && this.board.charAt(b) === this.board.charAt(c) && this.board.charAt(c) === this.board.charAt(d)) {
+        console.log(a)
+        console.log(b)
         return [this.get3dCoord(a), this.get3dCoord(b), this.get3dCoord(c), this.get3dCoord(d)];
       }
     }
