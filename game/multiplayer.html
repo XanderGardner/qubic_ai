@@ -4,7 +4,6 @@
 		<meta charset="utf-8">
 		<title>Qubic - 2 Player</title>
 		
-
     <!-- navigation scripts -->
     <script>
       const isLocalDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
@@ -22,16 +21,6 @@
       document.head.appendChild(linkElement);
     </script>
 
-    <!-- define where to get threejs package -->
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://unpkg.com/three@v0.160.0/build/three.module.js",
-          "three/addons/": "https://unpkg.com/three@v0.160.0/examples/jsm/"
-        }
-      }
-    </script>
-
 	</head>
 
 	<body>
@@ -45,7 +34,7 @@
 
       const engineScript = document.createElement('script');
       engineScript.type = 'module';
-      engineScript.src = baseURL + 'scripts/game_engine.js';
+      engineScript.src = baseURL + 'dist/engine_multiplayer.js';
       document.body.appendChild(engineScript);
     </script>
 
