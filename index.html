@@ -22,14 +22,14 @@
     </script>
 
     <!-- define where to get threejs package -->
-    <script type="importmap">
+    <!-- <script type="importmap">
       {
         "imports": {
           "three": "https://unpkg.com/three@v0.160.0/build/three.module.js",
           "three/addons/": "https://unpkg.com/three@v0.160.0/examples/jsm/"
         }
       }
-    </script>
+    </script> -->
     
 	</head>
 
@@ -50,7 +50,7 @@
 
       const engineScript = document.createElement('script');
       engineScript.type = 'module';
-      engineScript.src = baseURL + 'scripts/index_loading.js';
+      engineScript.src = baseURL + 'dist/index_loading.js';
       document.body.appendChild(engineScript);
     </script>
     
