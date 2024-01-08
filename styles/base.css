@@ -5,6 +5,38 @@ body {
   font-size: 3vh; /* Font size in em units */
 }
 
+h1 {
+  width: 100%;
+  text-align: center;
+  color: #fff; /* Button text color */
+  padding-top: 5vh;
+  font-size: 12vh;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px 20px; 
+  background-color: #3498db; /* Button background color */
+  color: #fff; /* Button text color */
+  border: 1px solid #2980b9; /* Button border color */
+  border-radius: 5px; /* Adjust border-radius for rounded corners */
+  transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+a:hover {
+  background-color: #2980b9; /* Change background color on hover */
+}
+
+#buttoncontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6vh;
+  height: 50vh; /* Adjust height as needed */
+}
+
+
 #gamestatediv {
   position: fixed;
 	top: 5vh;
@@ -16,6 +48,8 @@ body {
 }
 
 
+
+
 /* ///////////////// game engine styles ///////////////// */
 
 @media screen and (orientation: landscape) {
@@ -23,11 +57,9 @@ body {
     position: absolute;
     top: 5vh;
     left: 4vh;
-    width: 100%;
     text-align: left;
     display: block;
     z-index: 101;
-    color: white;
   }
   
   #gamemodediv {
@@ -45,20 +77,17 @@ body {
 @media screen and (orientation: portrait) {
   #restartbutton {
     position: fixed;
-    bottom: 6vh;
-    left: 4vw;
-    width: 100%;
+    bottom: 7vh;
+    left: 5%;
     text-align: center;
     display: block;
     z-index: 101;
-    color: white;
   }
   
   #gamemodediv {
     position: fixed;
-    bottom: 1vh;
-    left: 4vw;
-    width: 100%;
+    bottom: 2vh;
+    left: 5%;
     text-align: center;
     display: block;
     z-index: 100;

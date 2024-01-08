@@ -20,16 +20,39 @@
       linkElement.href = baseURL + 'styles/base.css';
       document.head.appendChild(linkElement);
     </script>
+
+    <!-- define where to get threejs package -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@v0.160.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@v0.160.0/examples/jsm/"
+        }
+      }
+    </script>
     
 	</head>
 
 	<body>
-    <div>Cool Rotating Box</div>
+    <h1>QUBIC</h1>
 
     <!-- button go to game -->
-    <a href="#" onclick="navigateTo('game/ai_easy.html')">Easy AI</a>
-    <a href="#" onclick="navigateTo('game/ai_medium.html')">Medium AI</a>
-    <a href="#" onclick="navigateTo('game/ai_hard.html')">Hard AI</a>
-    <a href="#" onclick="navigateTo('game/multiplayer.html')">2 Player</a>
+    <div id="buttoncontainer">
+      <a href="#" onclick="navigateTo('game/ai_easy.html')">Easy</a>
+      <a href="#" onclick="navigateTo('game/ai_medium.html')">Medium</a>
+      <a href="#" onclick="navigateTo('game/ai_hard.html')">Hard</a>
+      <a href="#" onclick="navigateTo('game/multiplayer.html')">2 Player</a>
+    </div>
+
+    <!-- game code -->
+    <script>
+      const gameType = "multiplayer";
+
+      const engineScript = document.createElement('script');
+      engineScript.type = 'module';
+      engineScript.src = baseURL + 'scripts/index_loading.js';
+      document.body.appendChild(engineScript);
+    </script>
+    
   </body>
 </html>
