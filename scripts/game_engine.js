@@ -274,7 +274,7 @@ if ( WebGL.isWebGLAvailable() ) {
 
 	const warning = WebGL.getWebGLErrorMessage();
 	document.getElementById('container').appendChild(warning);
-
+  console.error("This Browser Does Not Support WebGL");
 }
 
 
