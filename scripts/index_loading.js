@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import WebGL from 'three/addons/capabilities/WebGL.js';
+// import WebGL from 'three/addons/capabilities/WebGL.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
 //////////////// gloabl variables ////////////////
@@ -93,16 +93,16 @@ window.addEventListener('resize', function() {
 });
 
 // check if 3js is able to be supported on this device/browser
-if ( WebGL.isWebGLAvailable() ) {
+// if ( WebGL.isWebGLAvailable() ) {
 
-  renderer.setAnimationLoop(animate);
+renderer.setAnimationLoop(animate);
   
-} else {
+// } else {
 
-	const warning = WebGL.getWebGLErrorMessage();
-	document.getElementById('container').appendChild(warning);
+// 	const warning = WebGL.getWebGLErrorMessage();
+// 	document.getElementById('container').appendChild(warning);
 
-}
+// }
 
 
 
