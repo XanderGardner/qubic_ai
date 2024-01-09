@@ -188,14 +188,22 @@ export class QubicGameEngine {
     const update_mouse_position = function(e) {
       mousePosition.x = (e.clientX / this.window.innerWidth) * 2 - 1;
       mousePosition.y = - (e.clientY / this.window.innerHeight) * 2 + 1;
-    }
+    };
+
+    const update_touch_position = function(e) {
+      e.preventDefault();
+      const touch = e.touches[0];
+      update_mouse_position({
+        clientX: touch.clientX,
+        clientY: touch.clientY
+      });
+    };
 
     const press_function = function(e) {
 
       // touch device
       if ('ontouchstart' in window) {
-        e.preventDefault();
-        update_mouse_position();
+        update_touch_position();
       }
 
       // get intersections
