@@ -40,10 +40,6 @@ orbit.update();
 const mousePosition = new THREE.Vector2(-5,-5);
 const rayCaster = new THREE.Raycaster();
 
-// create axes
-// const axes = new THREE.AxesHelper(5)
-// scene.add(axes)
-
 // create spaces
 function create_space(x, y, z) {
 
@@ -245,12 +241,14 @@ const press_function = function(e) {
 
     // if single player, let ai make move
     if (game_mode !== "multiplayer") {
-      let [aix, aiy, aiz] = game.makeAIMove();
-      set_token_color_base(point_to_token[`${aix}${aiy}${aiz}`]);
-      set_game_state_div();
-      if (game.gameOver()) {
-        set_solution();
-      }
+      setTimeout(() => {
+        let [aix, aiy, aiz] = game.makeAIMove();
+        set_token_color_base(point_to_token[`${aix}${aiy}${aiz}`]);
+        set_game_state_div();
+        if (game.gameOver()) {
+          set_solution();
+        }
+      }, 100); // Increased delay to 100 milliseconds
     }
     
 
@@ -304,11 +302,10 @@ function update_token_hover() {
   
 }
 
-
 // animate loop
 function animate() {
+  requestAnimationFrame(animate);
   
-
   // update hover
   update_token_hover();
 
@@ -330,7 +327,7 @@ window.addEventListener('resize', function() {
 // check if 3js is able to be supported on this device/browser
 if ( WebGL.isWebGLAvailable() ) {
   
-  renderer.setAnimationLoop(animate);
+  animate();
   
 } else {
 

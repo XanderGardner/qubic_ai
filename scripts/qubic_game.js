@@ -125,7 +125,7 @@ export class QubicGame {
     } else if (game_mode == "medium") {
       [player_wins, move_i] = this.makeAIMoveHelper(board_arr, this.getTurn(), 4);
     } else {
-      [player_wins, move_i] = this.makeAIMoveHelper(board_arr, this.getTurn(), 6);
+      [player_wins, move_i] = this.makeAIMoveHelper(board_arr, this.getTurn(), 4);
     }
 
     this.board = this.board.substring(0,move_i) + this.state + this.board.substring(move_i+1);
