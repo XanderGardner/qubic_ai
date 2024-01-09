@@ -2,13 +2,15 @@
 // represent a qubic game 
 export class QubicGame {
   
-  constructor() {
+  constructor(game_mode) {
     // "1" or "2" for player turn, "-1" or "-2" for complete game, "0" for tie
     this.state = 1;
     // represent the board in a string
     this.board = "0".repeat(64);
     // store winning positions
     this.dirs = this.constructDirs();
+    // game mode
+    this.game_mode = game_mode
   }
 
   getlendirs() {
@@ -55,17 +57,82 @@ export class QubicGame {
       let [a,b,c,d] = this.dirs[i];
       if (this.board.charAt(a) !== "0" && this.board.charAt(a) === this.board.charAt(b)
           && this.board.charAt(b) === this.board.charAt(c) && this.board.charAt(c) === this.board.charAt(d)) {
-        console.log(a)
-        console.log(b)
         return [this.get3dCoord(a), this.get3dCoord(b), this.get3dCoord(c), this.get3dCoord(d)];
       }
     }
     return []
   }
 
+  // for a given board, turn, and depth to look, 
+  // return the number of the player who wins if forceable (else 0) and the best move to make (i)
+  makeAIMoveHelper(board_arr, turn, depth) {
+    // base case: no depth or board won
+    let board_state = this.checkWinner(board_arr)
+    if (depth === 0) {
+      return [board_state, 0];
+    }
+    if (board_state !== 0) {
+      return [board_state, 0];
+    }
 
-  makeAIMove(difficulty) {
-    return;
+    // recursive case: the board is unknown but has depth to check
+    let unknowns = []
+    let wins = []
+    let loses = []
+    let next_turn = turn === 1 ? 2 : 1;
+    for (let i = 0; i < 64; i++) {
+      // check valid moves only
+      if (board_arr[i] !== 0) {
+        continue;
+      }
+
+      board_arr[i] = turn;
+      let [check_winner, check_i] = this.makeAIMoveHelper(board_arr, next_turn, depth-1);
+      board_arr[i] = 0;
+
+      if (check_winner === 0) {
+        unknowns.push(i);
+      } else if (check_winner === turn) {
+        wins.push(i);
+      } else {
+        loses.push(i);
+      }
+    }
+
+    // make best move, or choose random from unknown
+    if (wins.length > 0) {
+      return [turn, wins[Math.floor(Math.random() * wins.length)]]
+    }
+    if (unknowns.length > 0) {
+      return [0, unknowns[Math.floor(Math.random() * unknowns.length)]]
+    }
+    if (loses.length > 0) {
+      return [next_turn, loses[Math.floor(Math.random() * loses.length)]]
+    }
+    return [0, 0]
+  }
+
+  // let the ai take a turn
+  makeAIMove() {
+    let board_arr = []
+    for (let i = 0; i < 64; i++) {
+      board_arr.push(parseInt(this.board.charAt(i)));
+    }
+
+    let player_wins, move_i;
+    if (game_mode === "easy") {
+      [player_wins, move_i] = this.makeAIMoveHelper(board_arr, this.getTurn(), 2);
+    } else if (game_mode == "medium") {
+      [player_wins, move_i] = this.makeAIMoveHelper(board_arr, this.getTurn(), 4);
+    } else {
+      [player_wins, move_i] = this.makeAIMoveHelper(board_arr, this.getTurn(), 6);
+    }
+
+    this.board = this.board.substring(0,move_i) + this.state + this.board.substring(move_i+1);
+    this.state = this.getBoardState(this.board);
+    
+    let [x,y,z] = this.get3dCoord(move_i);
+    return [x,y,z];
   }
 
 
@@ -220,64 +287,18 @@ export class QubicGame {
       return 1;
     }
   }
+
+  // return winner or zero if no one won
+  checkWinner(board_arr) {
+    for (let i = 0; i < this.dirs.length; i++) {
+      let [a,b,c,d] = this.dirs[i];
+      if (board_arr[a] !== 0 && board_arr[a] === board_arr[b]
+          && board_arr[b] === board_arr[c] && board_arr[c] === board_arr[d]) {
+        return board_arr[a];
+      }
+    }
+    return 0;
+  }
   
 }
-
-// let g = new QubicGame();
-
-// console.log("Test Game");
-// console.log(g.getState());
-// console.log(g.board);
-
-
-// console.log("-------");
-// let [x, y, z] = [0, 0, 0];
-// console.log(x, y, z);
-// g.makeMove(x, y, z);
-// console.log(g.getState());
-
-// console.log("-------");
-// [x, y, z] = [1, 1, 1];
-// console.log(x, y, z);
-// g.makeMove(x, y, z);
-// console.log(g.getState());
-
-// console.log("-------");
-// [x, y, z] = [1, 0, 1];
-// console.log(x, y, z);
-// g.makeMove(x, y, z);
-// console.log(g.getState());
-
-
-// console.log("-------");
-// [x, y, z] = [2, 2, 2];
-// console.log(x, y, z);
-// g.makeMove(x, y, z);
-// console.log(g.getState());
-
-
-// console.log("-------");
-// [x, y, z] = [2, 0, 2];
-// console.log(x, y, z);
-// g.makeMove(x, y, z);
-// console.log(g.getState());
-
-
-// console.log("-------");
-// [x, y, z] = [3, 3, 3];
-// console.log(x, y, z);
-// g.makeMove(x, y, z);
-// console.log(g.getState());
-
-
-// console.log("-------");
-// [x, y, z] = [3, 0, 3];
-// console.log(x, y, z);
-// g.makeMove(x, y, z);
-// console.log(g.getState());
-
-// console.log("-----");
-// console.log("winning coords:");
-// console.log(g.getWinningCoords());
-// console.log("winner: "+ g.getWinner());
 

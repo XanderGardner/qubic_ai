@@ -68,11 +68,13 @@ function create_space(x, y, z) {
 }
 
 let tokens = [];
+let point_to_token = new Object();
 for (let x = 0; x <= 3; x++) {
   for (let y = 0; y <= 3; y++) {
     for (let z = 0; z <= 3; z++) {
       let [edge, token] = create_space(x,y,z);
       tokens.push(token);
+      point_to_token[`${x}${y}${z}`] = token
       scene.add(token);
       scene.add(edge);
     }
@@ -80,7 +82,7 @@ for (let x = 0; x <= 3; x++) {
 }
 
 // create game
-const game = new QubicGame();
+const game = new QubicGame(game_mode);
 
 
 
@@ -190,7 +192,7 @@ function set_token_color_hover(token_object) {
   token_object.material.opacity = opacity_hover;
   if (game.getTurn() === 1) {
     token_object.material.color.set(color_token1);
-  } else {
+  } else if (game_mode === "multiplayer") {
     token_object.material.color.set(color_token2);
   }
 }
@@ -242,9 +244,9 @@ const press_function = function(e) {
   } else {
 
     // if single player, let ai make move
-    if (game_mode === "easy") {
-      game.makeAIMove();
-      set_token_color_base(curr_token);
+    if (game_mode !== "multiplayer") {
+      let [aix, aiy, aiz] = game.makeAIMove();
+      set_token_color_base(point_to_token[`${aix}${aiy}${aiz}`]);
       set_game_state_div();
       if (game.gameOver()) {
         set_solution();
