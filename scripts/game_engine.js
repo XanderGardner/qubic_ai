@@ -203,7 +203,7 @@ export class QubicGameEngine {
 
       // touch device
       if ('ontouchstart' in window) {
-        update_touch_position();
+        update_touch_position(e);
       }
 
       // get intersections
