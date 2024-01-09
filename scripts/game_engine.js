@@ -185,8 +185,7 @@ export class QubicGameEngine {
 
     //////////////// game mechanics ////////////////
 
-    // select objects to make move
-    window.addEventListener('mousedown', function(e) {
+    const press_function = function(e) {
 
       // get intersections
       rayCaster.setFromCamera(mousePosition, camera);
@@ -211,7 +210,13 @@ export class QubicGameEngine {
       if (game.gameOver()) {
         set_solution();
       }
-    });
+    }
+
+
+    window.addEventListener('touchstart', press_function)
+
+    // select objects to make move
+    window.addEventListener('mousedown', press_function);
 
 
     // update hovering token color
