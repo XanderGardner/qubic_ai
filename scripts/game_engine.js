@@ -185,7 +185,17 @@ export class QubicGameEngine {
 
     //////////////// game mechanics ////////////////
 
+    const update_mouse_position = function(e) {
+      mousePosition.x = (e.clientX / this.window.innerWidth) * 2 - 1;
+      mousePosition.y = - (e.clientY / this.window.innerHeight) * 2 + 1;
+    }
+
     const press_function = function(e) {
+
+      // touch device
+      if ('ontouchstart' in window) {
+        update_mouse_position();
+      }
 
       // get intersections
       rayCaster.setFromCamera(mousePosition, camera);
@@ -266,10 +276,7 @@ export class QubicGameEngine {
 
 
     // update mouse position
-    window.addEventListener('mousemove', function(e) {
-      mousePosition.x = (e.clientX / this.window.innerWidth) * 2 - 1;
-      mousePosition.y = - (e.clientY / this.window.innerHeight) * 2 + 1;
-    });
+    window.addEventListener('mousemove', update_mouse_position);
 
     // check for resizing window
     window.addEventListener('resize', function() {
