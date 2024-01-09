@@ -186,8 +186,8 @@ export class QubicGameEngine {
     //////////////// game mechanics ////////////////
 
     const update_mouse_position = function(e) {
-      mousePosition.x = (e.clientX / this.window.innerWidth) * 2 - 1;
-      mousePosition.y = - (e.clientY / this.window.innerHeight) * 2 + 1;
+      mousePosition.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mousePosition.y = - (e.clientY / window.innerHeight) * 2 + 1;
     };
 
     const update_touch_position = function(e) {
