@@ -194,6 +194,7 @@ export class QubicGameEngine {
 
       // touch device
       if ('ontouchstart' in window) {
+        e.preventDefault();
         update_mouse_position();
       }
 
