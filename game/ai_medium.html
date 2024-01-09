@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Qubic - Medium</title>
+		
+    <!-- navigation scripts -->
+    <script>
+      const isLocalDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const baseURL = isLocalDevelopment ? '/' : '/qubic_ai/';
+      function navigateTo(page) {
+        window.location.href = baseURL + page;
+      }
+    </script>
+
+    <!-- style -->
+    <script>
+      const linkElement = document.createElement('link');
+      linkElement.rel = 'stylesheet';
+      linkElement.href = baseURL + 'styles/base.css';
+      document.head.appendChild(linkElement);
+    </script>
+
+	</head>
+
+	<body>
+    <a href="#" onclick="navigateTo('index.html')" id="restartbutton">Restart</a>
+    <div id="gamestatediv">Your Turn</div>
+    <div id="gamemodediv">Mode: Medium</div>
+		
+    <!-- game code -->
+    <script>
+      const game_mode = "medium";
+
+      const engineScript = document.createElement('script');
+      engineScript.type = 'module';
+      engineScript.src = baseURL + 'dist/game_engine.js';
+      document.body.appendChild(engineScript);
+    </script>
+
+
+	</body>
+</html>

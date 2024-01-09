@@ -64,6 +64,11 @@ export class QubicGame {
   }
 
 
+  makeAIMove(difficulty) {
+    return;
+  }
+
+
 
 
   ////////// getter //////////
