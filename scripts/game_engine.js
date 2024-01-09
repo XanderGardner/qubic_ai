@@ -201,11 +201,6 @@ export class QubicGameEngine {
 
     const press_function = function(e) {
 
-      // touch device
-      if ('ontouchstart' in window) {
-        update_touch_position(e);
-      }
-
       // get intersections
       rayCaster.setFromCamera(mousePosition, camera);
       const intersects = rayCaster.intersectObjects(tokens);
@@ -232,10 +227,16 @@ export class QubicGameEngine {
     }
 
 
-    window.addEventListener('touchstart', press_function)
-
     // select objects to make move
-    window.addEventListener('mousedown', press_function);
+    window.addEventListener('touchstart', function(e) {
+      update_touch_position(e);
+      press_function(e);
+    });
+    
+    window.addEventListener('mousedown', function(e) {
+      update_mouse_position(e);
+      press_function(e);
+    });
 
 
     // update hovering token color
