@@ -2,13 +2,14 @@ body {
   font-family: 'VT323', monospace;
   margin: 0; 
   padding: 0;
-  font-size: 3vh; /* Font size in em units */
+  font-size: 3vh;
+  background-color: black;
 }
 
 h1 {
   width: 100%;
   text-align: center;
-  color: #6c648b; /* Button text color */
+  color: #6c648b;
   padding-top: 5vh;
   font-size: 12vh;
 }
@@ -21,10 +22,10 @@ a {
   color: #6c648b;
   border: 1px solid #6c648b;
   border-radius: 5px;
-  transition: background-color 0.4s ease; /* Smooth transition effect */
+  transition: background-color 0.4s ease;
 }
 a:hover {
-  background-color: rgba(182, 161, 158, 0.2); /* Change background color on hover */
+  background-color: rgba(182, 161, 158, 0.2);
 }
 
 #buttoncontainer {
@@ -33,7 +34,7 @@ a:hover {
   justify-content: center;
   align-items: center;
   gap: 6vh;
-  height: 50vh; /* Adjust height as needed */
+  height: 50vh;
 }
 
 

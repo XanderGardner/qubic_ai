@@ -62,7 +62,7 @@ export class QubicGameEngine {
       edgesMesh.position.set(x+0.5,y+0.5,z*z_stretch);
 
       // create the token for the space
-      const tokenGeometry = new THREE.CircleGeometry(0.4, 32);
+      const tokenGeometry = new THREE.CircleGeometry(0.485, 32);
       const tokenMaterial = new THREE.MeshBasicMaterial({ 
         color: color_token1, 
         side: THREE.DoubleSide,
